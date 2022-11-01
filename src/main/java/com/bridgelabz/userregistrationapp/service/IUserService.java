@@ -12,4 +12,10 @@ public interface IUserService {
     User getUser(long userId);
     String userLogin(LoginDTO loginDTO);
     User getUser(String token);
+
+    String validateUser(String email, String otp);
+
+    String resetPassword(String token, String password);
+
+    String generateResetPasswordToken(String email);
 }

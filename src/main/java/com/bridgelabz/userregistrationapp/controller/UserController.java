@@ -47,4 +47,20 @@ public class UserController {
         return new ResponseEntity<>(user,HttpStatus.OK);
     }
 
+    @PutMapping("/validate-user/{email}")
+    public ResponseEntity<String> validateUser(@PathVariable("email") String email, @RequestParam String otp){
+        return new ResponseEntity<>(userService.validateUser(email,otp), HttpStatus.OK);
+    }
+
+    @PutMapping("/reset-password-token/{email}")
+    public ResponseEntity<String> generateResetPasswordToken(@PathVariable("email") String email){
+        String token = userService.generateResetPasswordToken(email);
+        return new ResponseEntity<>(token, HttpStatus.OK);
+    }
+
+    @PutMapping("/reset-password/{token}")
+    public ResponseEntity<String> resetPassword(@PathVariable("token") String token, @RequestBody String password){
+        return new ResponseEntity<>(userService.resetPassword(token,password),HttpStatus.OK);
+    }
+
 }
